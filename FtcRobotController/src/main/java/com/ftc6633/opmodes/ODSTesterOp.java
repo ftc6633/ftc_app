@@ -17,17 +17,12 @@ public class ODSTesterOp extends OpMode {
 
     // this declares the attribute sensor_ods, but does not create it
     private OpticalDistanceSensor sensor_ods;
-
-    // led on or off?
-    private boolean led_state  ;
-
     private SoundPlayer sound_effect = new SoundPlayer("/sdcard/sounds/coin.wav") ;
 
     @Override
     public void init() {
         // get the sensor using the hardware map created on the robot
         sensor_ods = hardwareMap.opticalDistanceSensor.get ("sensor_ods");
-        led_state = false ;
     }
 
     /*
