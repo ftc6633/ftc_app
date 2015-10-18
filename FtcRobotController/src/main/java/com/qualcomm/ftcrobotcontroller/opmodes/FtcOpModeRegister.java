@@ -36,8 +36,6 @@ import com.ftc6633.opmodes.*;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
 
-
-
 /**
  * Register Op Modes
  */
@@ -64,7 +62,7 @@ public class FtcOpModeRegister implements OpModeRegister {
       manager.register("SoundTesterOp", SoundTesterOp.class);
       manager.register("ODSTesterOp", ODSTesterOp.class);
 
-
+    //manager.register("MatrixK9TeleOp", MatrixK9TeleOp.class);
     //manager.register("K9TeleOp", K9TeleOp.class);
     //manager.register ("PushBotAuto", PushBotAuto.class);
     //manager.register ("PushBotManual", PushBotManual.class);
@@ -98,9 +96,9 @@ public class FtcOpModeRegister implements OpModeRegister {
     //manager.register ("PushBotOdsFollowEvent", PushBotOdsFollowEvent.class);
     //manager.register ("PushBotTouchEvent", PushBotTouchEvent.class);    
     
-    //manager.register("PushBotDriveTouch", PushBotDriveTouch.class);
-    //manager.register("PushBotIrSeek", PushBotIrSeek.class);
-    //manager.register("PushBotSquare", PushBotSquare.class);
+    //manager.register("PushBotDriveTouch", PushBotDriveTouch.java);
+    //manager.register("PushBotIrSeek", PushBotIrSeek.java);
+    //manager.register("PushBotSquare", PushBotSquare.java);
 
     
     
