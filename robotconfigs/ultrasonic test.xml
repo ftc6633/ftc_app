@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<Robot>
+    <LegacyModuleController name="legacy" serialNumber="AL00YDKV">
+        <UltrasonicSensor name="usonic" port="4" />
+    </LegacyModuleController>
+</Robot>

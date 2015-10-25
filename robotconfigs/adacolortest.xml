@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<Robot>
+    <DeviceInterfaceModule name="dim" serialNumber="AI02RLMY">
+        <AdafruitColorSensor name="color" port="5" />
+        <Led name="adaled" port="5" />
+    </DeviceInterfaceModule>
+</Robot>

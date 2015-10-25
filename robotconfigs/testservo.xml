@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<Robot>
+    <DeviceInterfaceModule name="Device Interface Module 1" serialNumber="AI02RLMY">
+        <OpticalDistanceSensor name="sensor_ods" port="7" />
+    </DeviceInterfaceModule>
+    <ServoController name="Servo Controller 2" serialNumber="AL00YAUD">
+        <Servo name="servo_test" port="1" />
+    </ServoController>
+</Robot>
