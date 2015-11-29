@@ -76,8 +76,8 @@ public class TankDrive extends OpMode {
 		 *    "servo_1" controls the arm joint of the manipulator.
 		 *    "servo_6" controls the claw joint of the manipulator.
 		 */
-		motorRight = hardwareMap.dcMotor.get("motor_2");
-		motorLeft = hardwareMap.dcMotor.get("motor_1");
+		motorRight = hardwareMap.dcMotor.get("right_drive");
+		motorLeft = hardwareMap.dcMotor.get("left_drive");
 		motorLeft.setDirection(DcMotor.Direction.REVERSE);
 
 	}

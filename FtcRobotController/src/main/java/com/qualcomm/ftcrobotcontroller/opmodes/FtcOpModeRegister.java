@@ -64,6 +64,7 @@ public class FtcOpModeRegister implements OpModeRegister {
       manager.register("SoundTesterOp", SoundTesterOp.class);
       manager.register("ODSTesterOp", ODSTesterOp.class);
       manager.register("TankDrive", TankDrive.class);
+      manager.register("EncoderTest", EncoderTestOp.class);
       manager.register("UltraSonicTesterOp", UltraSonicTesterOp.class);
 
 
