@@ -1,33 +1,33 @@
-/* Copyright (c) 2015 Qualcomm Technologies Inc
+/*
+Run_using_encoders vs run_to_position
+Can someone explain the difference between RUN_USING_ENCODERS and RUN_TO_POSITION. I do not see
+ anything in the javadocs and as far I can tell, each channel mode requires you to:
 
-All rights reserved.
+1) reset the encoder
+2) wait one or more hardware cycles for the motor position to register
+3) set your own desired power
+4) check if the motor position value is close to the desired target within each hardware cycle
+5) issue your own motor stop command.
 
-Redistribution and use in source and binary forms, with or without modification,
-are permitted (subject to the limitations in the disclaimer below) provided that
-the following conditions are met:
+All of the above seems obvious to me when the channel mode is set to RUN_USING_ENCODERS.
+However RUN_TO_POSITION requires you to set the target position. This to me implies that the onus
+would not be on the programmer to handle #4 and #5 above.
+Is this in fact the case or am I missing some other difference in behavior?
 
-Redistributions of source code must retain the above copyright notice, this list
-of conditions and the following disclaimer.
+...
+...
 
-Redistributions in binary form must reproduce the above copyright notice, this
-list of conditions and the following disclaimer in the documentation and/or
-other materials provided with the distribution.
+The run to position command slows the motor as you approach the set target position and holds the
+motor at that position similar to a servo until you issue a new command.
+The motor will turn CW or CCW as needed to get to the set target value.
+You just set a positive setpower level.
 
-Neither the name of Qualcomm Technologies Inc nor the names of its contributors
-may be used to endorse or promote products derived from this software without
-specific prior written permission.
+Run using encoders is more of a set speed command. The max setpower results in about an 80% of max
+speed so PID can adjust the power level to maintain the speed in case of increased drag or slope.
 
-NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS
-LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
-THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
+http://www.hitechnic.com/blog/wp-content/uploads/HiTechnic-Motor-Controller-Specification.pdf
+
+ */
 
 package com.ftc6633.opmodes;
 
