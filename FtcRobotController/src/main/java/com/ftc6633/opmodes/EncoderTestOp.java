@@ -27,6 +27,9 @@ speed so PID can adjust the power level to maintain the speed in case of increas
 
 http://www.hitechnic.com/blog/wp-content/uploads/HiTechnic-Motor-Controller-Specification.pdf
 
+http://ftcforum.usfirst.org/showthread.php?4986-Run_using_encoders-vs-run_to_position
+http://ftcforum.usfirst.org/showthread.php?5535-Motor-Encoders
+
  */
 
 package com.ftc6633.opmodes;
