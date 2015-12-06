@@ -64,7 +64,7 @@ public class EncoderTestOp extends LinearOpMode {
     // wait for the start button to be pressed
     waitForStart();
 
-    int target = 1514;
+    int target = 1514; // one revolution
 
     motorLeft.setTargetPosition(target);
     motorRight.setTargetPosition(target);
