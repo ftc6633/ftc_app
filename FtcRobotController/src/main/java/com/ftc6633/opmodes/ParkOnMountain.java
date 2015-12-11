@@ -26,15 +26,24 @@ public class ParkOnMountain extends LinearOpMode {
 
         collector = hardwareMap.dcMotor.get("m21");
 
-        frontRightWheel.setDirection(DcMotor.Direction.REVERSE);
-        rearRightWheel.setDirection(DcMotor.Direction.REVERSE);
+
 
         frontLeftWheel.setDirection(DcMotor.Direction.REVERSE);
         rearLeftWheel.setDirection(DcMotor.Direction.REVERSE);
 
 
 
-        Turn(1.0,1.0);
+        SetAllMotors(0.3);
+        sleep(2000);
+        SetAllMotors(0.0);
+
+        Turn(0.3,-0.3);
+        sleep(750);
+        SetAllMotors(0.0);
+        sleep(500);
+        SetAllMotors(0.5);
+        sleep(750);
+        SetAllMotors(0.0);
 
 
 
