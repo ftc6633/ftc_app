@@ -2,10 +2,10 @@ apply plugin: 'com.android.application'
 
 android {
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 19
     }
-    compileSdkVersion 'Google Inc.:Google APIs:19'
+    compileSdkVersion 23
     buildToolsVersion '21.1.2'
 }
 
@@ -44,4 +44,5 @@ dependencies {
     compile(name: 'ModernRobotics-release', ext: 'aar')
     compile(name: 'Analytics-release', ext: 'aar')
     compile(name: 'WirelessP2p-release', ext: 'aar')
+    compile project(':openCVLibrary310')
 }

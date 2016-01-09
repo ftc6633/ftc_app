@@ -40,6 +40,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     android:id="@+id/entire_screen"
     android:orientation="vertical">
 
+    <org.opencv.android.JavaCameraView
+        android:layout_width="fill_parent"
+        android:layout_height="280dp"
+        android:id="@+id/color_blob_detection_activity_surface_view" />
+
   <!-- black bar on top -->
   <RelativeLayout
     android:id="@+id/top_bar"

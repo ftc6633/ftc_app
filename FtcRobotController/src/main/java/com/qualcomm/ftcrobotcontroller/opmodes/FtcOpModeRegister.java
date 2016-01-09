@@ -33,6 +33,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.ftc6633.opmodes.*;
 
+import com.qualcomm.ftcrobotcontroller.opmodes.AutoTest;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
 
@@ -62,6 +63,7 @@ public class FtcOpModeRegister implements OpModeRegister {
       manager.register("NullOp", NullOp.class);
       manager.register("FourWheelerTest",FourWheelerTest.class);
       manager.register("ParkOnMountain",ParkOnMountain.class);
+      manager.register("AutonomousOPenCV", AutoTest.class);
       //manager.register("ServoTesterOp", ServoTesterOp.class);
       //manager.register("SoundTesterOp", SoundTesterOp.class);
       //manager.register("ODSTesterOp", ODSTesterOp.class);
