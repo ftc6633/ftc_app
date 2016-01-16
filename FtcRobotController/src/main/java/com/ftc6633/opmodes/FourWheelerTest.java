@@ -50,16 +50,12 @@ public class FourWheelerTest extends OpMode {
 		 *    "servo_1" controls the arm joint of the manipulator.
 		 *    "servo_6" controls the claw joint of the manipulator.
 		 */
-        frontRightWheel = hardwareMap.dcMotor.get("m11");
-        rearRightWheel = hardwareMap.dcMotor.get("m31");
+        frontRightWheel = hardwareMap.dcMotor.get("m12");
+        rearRightWheel = hardwareMap.dcMotor.get("m32");
 
-        frontLeftWheel = hardwareMap.dcMotor.get("m12");
-        rearLeftWheel = hardwareMap.dcMotor.get("m32");
+        frontLeftWheel = hardwareMap.dcMotor.get("m11");
+        rearLeftWheel = hardwareMap.dcMotor.get("m31");
 
-		collector = hardwareMap.dcMotor.get("m21");
-
-        frontRightWheel.setDirection(DcMotor.Direction.REVERSE);
-        rearRightWheel.setDirection(DcMotor.Direction.REVERSE);
 
         frontLeftWheel.setDirection(DcMotor.Direction.REVERSE);
         rearLeftWheel.setDirection(DcMotor.Direction.REVERSE);
@@ -85,7 +81,6 @@ public class FourWheelerTest extends OpMode {
         // note that if y equal -1 then joystick is pushed all of the way forward.
         float left = -gamepad1.left_stick_y;
         float right = -gamepad1.right_stick_y;
-        float collect = -gamepad2.right_stick_y;
 
 		// clip the right/left values so that the values never exceed +/- 1
 		right = Range.clip(right, -1, 1);
@@ -95,16 +90,14 @@ public class FourWheelerTest extends OpMode {
 		// the robot more precisely at slower speeds.
 		right = (float) ScaleInput.scaleInput(right);
 		left =  (float)ScaleInput.scaleInput(left);
-        collect =  (float)ScaleInput.scaleInput(collect);
-		
+
 		// write the values to the motors
-        frontRightWheel.setPower(-right);
-        rearRightWheel.setPower(-right);
+        frontRightWheel.setPower(right);
+        rearRightWheel.setPower(right);
 
         frontLeftWheel.setPower(left);
         rearLeftWheel.setPower(left);
 
-        collector.setPower(collect);
 
 		/*
 		 * Send telemetry data back to driver station. Note that if we are using
