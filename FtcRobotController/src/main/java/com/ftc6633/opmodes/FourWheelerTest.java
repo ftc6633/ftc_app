@@ -53,7 +53,7 @@ public class FourWheelerTest extends OpMode {
         frontRightWheel = hardwareMap.dcMotor.get("m32");
         rearRightWheel = hardwareMap.dcMotor.get("m12");
 
-        frontLeftWheel = hardwareMap.dcMotor.get("m32");
+        frontLeftWheel = hardwareMap.dcMotor.get("m31");
         rearLeftWheel = hardwareMap.dcMotor.get("m11");
 
 
