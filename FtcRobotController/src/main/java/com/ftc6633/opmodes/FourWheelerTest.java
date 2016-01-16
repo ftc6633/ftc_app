@@ -50,11 +50,11 @@ public class FourWheelerTest extends OpMode {
 		 *    "servo_1" controls the arm joint of the manipulator.
 		 *    "servo_6" controls the claw joint of the manipulator.
 		 */
-        frontRightWheel = hardwareMap.dcMotor.get("m12");
-        rearRightWheel = hardwareMap.dcMotor.get("m32");
+        frontRightWheel = hardwareMap.dcMotor.get("m32");
+        rearRightWheel = hardwareMap.dcMotor.get("m12");
 
-        frontLeftWheel = hardwareMap.dcMotor.get("m11");
-        rearLeftWheel = hardwareMap.dcMotor.get("m31");
+        frontLeftWheel = hardwareMap.dcMotor.get("m32");
+        rearLeftWheel = hardwareMap.dcMotor.get("m11");
 
 
         frontLeftWheel.setDirection(DcMotor.Direction.REVERSE);
