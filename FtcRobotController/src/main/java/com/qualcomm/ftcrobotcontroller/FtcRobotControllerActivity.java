@@ -31,9 +31,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller;
 
+
+/**
+ * JG Adapted from OpenCV Color Blob sample activity and also FtcRobotController Activity
+ * - 2015 February got everything running with active touch camera view in Robot Controller display
+ *
+ */
+
 import java.util.List;
-
-
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.LoaderCallbackInterface;
@@ -53,7 +58,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 
 import android.app.ActionBar;
@@ -65,11 +71,14 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.hardware.usb.UsbManager;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -131,7 +140,7 @@ public class FtcRobotControllerActivity extends Activity implements OnTouchListe
   private Mat                  mRgba;
   private Scalar               mBlobColorRgba;
   private Scalar               mBlobColorHsv;
-  private ColorBlobDetector    mDetector;
+  public ColorBlobDetector    mDetector;
   private Mat                  mSpectrum;
   private Size                 SPECTRUM_SIZE;
   private Scalar               CONTOUR_COLOR;
@@ -474,7 +483,22 @@ public class FtcRobotControllerActivity extends Activity implements OnTouchListe
     mBlobColorRgba = new Scalar(255);
     mBlobColorHsv = new Scalar(255);
     SPECTRUM_SIZE = new Size(200, 64);
+// RJG white for better contrast against red target
     CONTOUR_COLOR = new Scalar(255,255,255,255);
+
+// RJG updated 2015-01-14
+// Red beacon color blob
+    mBlobColorHsv.val[0] = 260;
+    mBlobColorHsv.val[1] = 100;
+    mBlobColorHsv.val[2] = 205;
+    mBlobColorHsv.val[3] = 255;
+//    mBlobColorHsv.val[0] = 220;
+//    mBlobColorHsv.val[1] = 62;
+//    mBlobColorHsv.val[2] = 255;
+//    mBlobColorHsv.val[3] = 255;
+    mDetector.setHsvColor(mBlobColorHsv);
+    Imgproc.resize(mDetector.getSpectrum(), mSpectrum, SPECTRUM_SIZE);
+    mIsColorSelected = true;
   }
 
   public void onCameraViewStopped() {
@@ -533,14 +557,13 @@ public class FtcRobotControllerActivity extends Activity implements OnTouchListe
 
   public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
     mRgba = inputFrame.rgba();
-
+//java.util.Date.getTime()
     if (mIsColorSelected) {
       mDetector.process(mRgba);
       goDirection = mDetector.getDirection();
       List<MatOfPoint> contours = mDetector.getContours();
 //      Log.e(TAG, "Contours count: " + contours.size());
       Imgproc.drawContours(mRgba, contours, -1, CONTOUR_COLOR);
-
       Mat colorLabel = mRgba.submat(4, 68, 4, 68);
       colorLabel.setTo(mBlobColorRgba);
 
@@ -553,6 +576,8 @@ public class FtcRobotControllerActivity extends Activity implements OnTouchListe
   public float getDirection() {
     return goDirection;
   }
+
+  public ColorBlobDetector getDetector() {    return mDetector;}
 
   private Scalar converScalarHsv2Rgba(Scalar hsvColor) {
     Mat pointMatRgba = new Mat();
