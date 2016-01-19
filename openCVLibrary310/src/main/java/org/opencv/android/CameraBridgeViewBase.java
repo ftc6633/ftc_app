@@ -435,6 +435,7 @@ public abstract class CameraBridgeViewBase extends SurfaceView implements Surfac
     }
 
     /**
+     *
      * This method is invoked shall perform concrete operation to initialize the camera.
      * CONTRACT: as a result of this method variables mFrameWidth and mFrameHeight MUST be
      * initialized with the size of the Camera frames that will be delivered to external processor.
