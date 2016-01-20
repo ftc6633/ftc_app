@@ -33,7 +33,6 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.ftc6633.opmodes.*;
 
-import com.qualcomm.ftcrobotcontroller.opmodes.AutoTest;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
 
