@@ -61,10 +61,11 @@ public class FtcOpModeRegister implements OpModeRegister {
      *
      */
 
-      manager.register("NullOp", NullOp.class);
+//      manager.register("NullOp", NullOp.class);
       manager.register("FourWheelerTest",FourWheelerTest.class);
       manager.register("ParkOnMountain",ParkOnMountain.class);
-      manager.register("AutonomousOPenCV", AutoTest.class);
+//      manager.register("AutonomousOPenCV", AutoTest.class);
+      manager.register("AutoRedFar", AutoRedFar.class);
       //manager.register("ServoTesterOp", ServoTesterOp.class);
       //manager.register("SoundTesterOp", SoundTesterOp.class);
       //manager.register("ODSTesterOp", ODSTesterOp.class);

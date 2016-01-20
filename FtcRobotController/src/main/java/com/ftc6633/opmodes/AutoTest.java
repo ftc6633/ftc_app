@@ -6,6 +6,8 @@ import com.qualcomm.ftcrobotcontroller.FtcRobotControllerActivity;
 
 /**
  * RJG on 2015-12-19
+ * JG
+ * GitHub Test 4
  */
 
 public class AutoTest extends LinearOpMode {
