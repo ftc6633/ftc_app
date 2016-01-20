@@ -1,9 +1,13 @@
 package com.ftc6633.utils;
 
+import com.qualcomm.robotcore.util.Range;
+import com.ftc6633.utils.PowerLevels;
 /**
  * Created by rupello on 1/8/2016.
  */
+
 public class ScaleInput {
+
     /*
 	 * This method scales the joystick input so for low joystick values, the
 	 * scaled value is less than linear.  This is to make it easier to drive
@@ -36,5 +40,23 @@ public class ScaleInput {
 
         // return scaled value.
         return dScale;
+    }
+
+    public static PowerLevels arcadeScale(double stick_x, double stick_y) {
+        stick_x = Range.clip(stick_x, -1, 1);
+        stick_y = Range.clip(stick_y, -1, 1);
+        double right_power = stick_y;
+        double left_power = stick_y;
+        // adjust power of left/right motor according to steering
+        double scale = 1.0;
+        if(stick_x > 0) {
+            scale = -(stick_x * 2 - 1.);
+            left_power = left_power * scale;
+        }
+        else if(stick_x < 0) {
+            scale = (stick_x * 2 + 1.);
+            right_power = right_power * scale;
+        }
+        return new PowerLevels(right_power,left_power);
     }
 }
