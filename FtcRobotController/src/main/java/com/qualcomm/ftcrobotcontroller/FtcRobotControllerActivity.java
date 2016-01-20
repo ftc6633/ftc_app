@@ -34,7 +34,7 @@ package com.qualcomm.ftcrobotcontroller;
 
 /**
  * JG Adapted from OpenCV Color Blob sample activity and also FtcRobotController Activity
- * - 2015 February got everything running with active touch camera view in Robot Controller display
+ * - 2015 December got everything running with active touch camera view in Robot Controller display
  *
  */
 
@@ -173,11 +173,9 @@ public class FtcRobotControllerActivity extends Activity implements OnTouchListe
 
 
   protected class RobotRestarter implements Restarter {
-
     public void requestRestart() {
       requestRobotRestart();
     }
-
   }
 
   protected ServiceConnection connection = new ServiceConnection() {
@@ -556,13 +554,20 @@ public class FtcRobotControllerActivity extends Activity implements OnTouchListe
   }
 
   public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
+    Rect clipRect;    // RJG clip away noise from background
+    Scalar rect_COLOR = new Scalar(0, 255, 255, 255); // show clipping rectangle in yellow-green
+    int top = 136;
+
+    // RJG 2016-01-19 clip to eliminate red sweatshirt problem
+    clipRect = new Rect(0,top,480,100);  // left, top, width, height
     mRgba = inputFrame.rgba();
-//java.util.Date.getTime()
+    Mat roiRgba = mRgba.submat(clipRect);
+    Imgproc.rectangle(mRgba, clipRect.tl(), clipRect.br(), rect_COLOR, 2);
+
     if (mIsColorSelected) {
-      mDetector.process(mRgba);
+      mDetector.process(roiRgba);   // RJG 2016-01-19 clip to eliminate red sweatshirt problem
       goDirection = mDetector.getDirection();
       List<MatOfPoint> contours = mDetector.getContours();
-//      Log.e(TAG, "Contours count: " + contours.size());
       Imgproc.drawContours(mRgba, contours, -1, CONTOUR_COLOR);
       Mat colorLabel = mRgba.submat(4, 68, 4, 68);
       colorLabel.setTo(mBlobColorRgba);
@@ -570,6 +575,7 @@ public class FtcRobotControllerActivity extends Activity implements OnTouchListe
       Mat spectrumLabel = mRgba.submat(4, 4 + mSpectrum.rows(), 70, 70 + mSpectrum.cols());
       mSpectrum.copyTo(spectrumLabel);
     }
+    roiRgba.release();
     return mRgba;
   }
 
