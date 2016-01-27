@@ -5,6 +5,7 @@ package com.ftc6633.opmodes;
 import com.ftc6633.utils.ScaleInput;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 /**
@@ -19,6 +20,8 @@ public class FourWheelerTest extends OpMode {
     DcMotor frontLeftWheel;
     DcMotor rearLeftWheel;
     DcMotor collector;
+    Servo rightSideServo;
+    Servo leftSideServo;
 
 	/**
 	 * Constructor
@@ -56,6 +59,8 @@ public class FourWheelerTest extends OpMode {
         frontLeftWheel = hardwareMap.dcMotor.get("m31");
         rearLeftWheel = hardwareMap.dcMotor.get("m11");
 
+        rightSideServo = hardwareMap.servo.get("rss");
+        leftSideServo = hardwareMap.servo.get("lss");
 
         frontLeftWheel.setDirection(DcMotor.Direction.REVERSE);
         rearLeftWheel.setDirection(DcMotor.Direction.REVERSE);
@@ -82,9 +87,20 @@ public class FourWheelerTest extends OpMode {
         float left = -gamepad1.left_stick_y;
         float right = -gamepad1.right_stick_y;
 
+        float servoLeft = gamepad2.left_trigger;
+        float servoRight = gamepad2.right_trigger;
+
 		// clip the right/left values so that the values never exceed +/- 1
 		right = Range.clip(right, -1, 1);
 		left = Range.clip(left, -1, 1);
+
+
+
+        double servoPosition = Range.clip((gamepad2.left_trigger + 1.0) / 2.0, Servo.MIN_POSITION, Servo.MAX_POSITION);
+        leftSideServo.setPosition(servoPosition);
+
+        double servoPosition2 = Range.clip((gamepad2.right_trigger + 1.0) / 2.0, Servo.MIN_POSITION, Servo.MAX_POSITION);
+        rightSideServo.setPosition(servoPosition);
 
 		// scale the joystick value to make it easier to control
 		// the robot more precisely at slower speeds.
