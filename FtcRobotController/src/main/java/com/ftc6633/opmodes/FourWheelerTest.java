@@ -62,10 +62,12 @@ public class FourWheelerTest extends OpMode {
         //Servo Functions!
         rightSideServo = hardwareMap.servo.get("rss");
         leftSideServo = hardwareMap.servo.get("lss");
-        tapeMeasurePositioner = hardwareMap.servo.get("sp1");
+        //tapeMeasurePositioner = hardwareMap.servo.get("sp1");
         //Dc Motor Functions!
-        tapeMeasureMotor = hardwareMap.dcMotor.get("tmm");
+        //tapeMeasureMotor = hardwareMap.dcMotor.get("tmm");
 
+        leftSideServo.setPosition(0.0);
+        rightSideServo.setPosition(1.0);
 
         frontLeftWheel.setDirection(DcMotor.Direction.REVERSE);
         rearLeftWheel.setDirection(DcMotor.Direction.REVERSE);
@@ -89,8 +91,8 @@ public class FourWheelerTest extends OpMode {
 
         // tank drive
         // note that if y equal -1 then joystick is pushed all of the way forward.
-        float left = -gamepad1.left_stick_y;
-        float right = -gamepad1.right_stick_y;
+        float left = gamepad1.left_stick_y;
+        float right = gamepad1.right_stick_y;
 
         float servoLeft = gamepad2.left_trigger;
         float servoRight = gamepad2.right_trigger;
@@ -104,17 +106,18 @@ public class FourWheelerTest extends OpMode {
 		right = Range.clip(right, -1, 1);
 		left = Range.clip(left, -1, 1);
 
-        double motorPower = Range.clip( gamepad2.right_stick_y,-1, 1);
-        motorPower = (float) ScaleInput.scaleInput(motorPower);
-        tapeMeasureMotor.setPower(motorPower);
+       // double motorPower = Range.clip( gamepad2.right_stick_y,-1, 1);
+       // motorPower = (float) ScaleInput.scaleInput(motorPower);
+        //tapeMeasureMotor.setPower(motorPower);
 
-        double servoPosition0 = Range.clip((gamepad2.left_stick_y + 1.0) / 2.0, Servo.MIN_POSITION, Servo.MAX_POSITION);
-        tapeMeasurePositioner.setPosition(servoPosition0);
+        //double servoPosition0 = Range.clip((gamepad2.left_stick_y + 1.0) / 2.0, Servo.MIN_POSITION, Servo.MAX_POSITION);
+        //tapeMeasurePositioner.setPosition(servoPosition0);
 
-        double servoPosition1 = Range.clip((gamepad2.left_trigger + 1.0) / 2.0, Servo.MIN_POSITION, Servo.MAX_POSITION);
+        // triggers are zero to one
+        double servoPosition1 = Range.clip(gamepad2.left_trigger, Servo.MIN_POSITION, Servo.MAX_POSITION);
         leftSideServo.setPosition(servoPosition1);
 
-        double servoPosition2 = Range.clip((gamepad2.right_trigger + 1.0) / 2.0, Servo.MIN_POSITION, Servo.MAX_POSITION);
+        double servoPosition2 = Range.clip(1.0-gamepad2.right_trigger, Servo.MIN_POSITION, Servo.MAX_POSITION);
         rightSideServo.setPosition(servoPosition2);
 
 		// scale the joystick value to make it easier to control
@@ -138,8 +141,8 @@ public class FourWheelerTest extends OpMode {
 		 */
 
 		telemetry.addData("Text", "*** Robot Data***");
-		telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
-		telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
+		telemetry.addData("left trig",  "left trig: " + String.format("%.2f", gamepad2.left_trigger));
+		telemetry.addData("right trig", "right trig: " + String.format("%.2f", gamepad2.right_trigger));
 	}
 
 	/*
