@@ -69,6 +69,10 @@ public class TeleOperator extends OpMode {
         leftSideServo.setPosition(0.0);
         rightSideServo.setPosition(1.0);
 
+
+        tapeMeasureMotor.setDirection(DcMotor.Direction.REVERSE);
+
+
         frontLeftWheel.setDirection(DcMotor.Direction.REVERSE);
         rearLeftWheel.setDirection(DcMotor.Direction.REVERSE);
 
