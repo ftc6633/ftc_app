@@ -13,7 +13,7 @@ import com.qualcomm.robotcore.util.Range;
  * <p>
  * Enables control of the robot via the gamepad
  */
-public class FourWheelerTest extends OpMode {
+public class TeleOperator extends OpMode {
 
     DcMotor frontRightWheel;
     DcMotor rearRightWheel;
@@ -22,11 +22,11 @@ public class FourWheelerTest extends OpMode {
     Servo rightSideServo;
     Servo leftSideServo;
     DcMotor tapeMeasureMotor;
-    Servo tapeMeasurePositioner;
+    DcMotor tapeMeasurePositioner;
 	/**
 	 * Constructor
 	 */
-	public FourWheelerTest() {
+	public TeleOperator() {
 
 	}
 
@@ -62,9 +62,9 @@ public class FourWheelerTest extends OpMode {
         //Servo Functions!
         rightSideServo = hardwareMap.servo.get("rss");
         leftSideServo = hardwareMap.servo.get("lss");
-        //tapeMeasurePositioner = hardwareMap.servo.get("sp1");
+        tapeMeasurePositioner = hardwareMap.dcMotor.get("mp1");
         //Dc Motor Functions!
-        //tapeMeasureMotor = hardwareMap.dcMotor.get("tmm");
+        tapeMeasureMotor = hardwareMap.dcMotor.get("tmm");
 
         leftSideServo.setPosition(0.0);
         rightSideServo.setPosition(1.0);
@@ -106,19 +106,20 @@ public class FourWheelerTest extends OpMode {
 		right = Range.clip(right, -1, 1);
 		left = Range.clip(left, -1, 1);
 
-       // double motorPower = Range.clip( gamepad2.right_stick_y,-1, 1);
-       // motorPower = (float) ScaleInput.scaleInput(motorPower);
-        //tapeMeasureMotor.setPower(motorPower);
+        double motorPower = Range.clip( gamepad2.right_stick_y,-1, 1);
+        motorPower = (float) ScaleInput.scaleInput(motorPower);
+        tapeMeasureMotor.setPower(motorPower);
 
-        //double servoPosition0 = Range.clip((gamepad2.left_stick_y + 1.0) / 2.0, Servo.MIN_POSITION, Servo.MAX_POSITION);
-        //tapeMeasurePositioner.setPosition(servoPosition0);
+        motorPower = Range.clip(gamepad2.left_stick_y, -1, 1);
+        motorPower = (float) ScaleInput.scaleInput(motorPower);
+        tapeMeasurePositioner.setPower(motorPower);
 
         // triggers are zero to one
-        double servoPosition1 = Range.clip(gamepad2.left_trigger, Servo.MIN_POSITION, Servo.MAX_POSITION);
-        leftSideServo.setPosition(servoPosition1);
+        double servoPosition = Range.clip(gamepad2.left_trigger, Servo.MIN_POSITION, Servo.MAX_POSITION);
+        leftSideServo.setPosition(servoPosition);
 
-        double servoPosition2 = Range.clip(1.0-gamepad2.right_trigger, Servo.MIN_POSITION, Servo.MAX_POSITION);
-        rightSideServo.setPosition(servoPosition2);
+        servoPosition = Range.clip(1.0-gamepad2.right_trigger, Servo.MIN_POSITION, Servo.MAX_POSITION);
+        rightSideServo.setPosition(servoPosition);
 
 		// scale the joystick value to make it easier to control
 		// the robot more precisely at slower speeds.
