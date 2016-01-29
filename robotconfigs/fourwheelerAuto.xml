@@ -1,5 +1,13 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <Robot>
+    <MotorController name="mc2" serialNumber="AL00VVOB">
+        <Motor name="mp1" port="1" />
+        <Motor name="tmm" port="2" />
+    </MotorController>
+    <ServoController name="sc1" serialNumber="AL00YAUD">
+        <Servo name="rss" port="1" />
+        <Servo name="lss" port="2" />
+    </ServoController>
     <MotorController name="mc1" serialNumber="AL00XV7V">
         <Motor name="m11" port="1" />
         <Motor name="m12" port="2" />
